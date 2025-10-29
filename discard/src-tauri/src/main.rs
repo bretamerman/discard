@@ -4,3 +4,4 @@
 fn main() {
     discard_lib::run()
 }
+

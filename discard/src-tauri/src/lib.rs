@@ -8,6 +8,7 @@ use tauri_plugin_updater::UpdaterExt;
 
 pub fn run() {
     tauri::Builder::default()
+        .invoke_handler(tauri::generate_handler![greet])
         .setup(|app| {
             let handle = app.handle().clone();
             tauri::async_runtime::spawn(async move {

@@ -1,11 +1,20 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/core";
+import { getVersion } from "@tauri-apps/api/app";
 import "./App.css";
 
 function App() {
   const [greetMsg, setGreetMsg] = useState("");
   const [name, setName] = useState("");
+  const [version, setVersion] = useState("");
+
+  useEffect(() => {
+      (async () => {
+          const v = await getVersion();
+          setVersion(v);
+      })();
+  }, []);
 
   async function greet() {
     // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
@@ -44,6 +53,7 @@ function App() {
         <button type="submit">Greet</button>
       </form>
       <p>{greetMsg}</p>
+      <p>Version: {version}</p>
     </main>
   );
 }
